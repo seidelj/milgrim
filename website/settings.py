@@ -112,6 +112,10 @@ USE_L10N = True
 
 USE_TZ = True
 
+import dj_database_url
+
+DATABASES['default'] = dj_database_url.config()
+
 SECURE_PROXY_SSL_HEADER = ("HTTP_X_FORWARDED_PROTO", 'https')
 
 #ALLOW ALL HOSTS
