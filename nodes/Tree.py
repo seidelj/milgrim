@@ -19,7 +19,7 @@ class Node(object):
         13:[],
     }
 
-    def get_description(prob):
+    def get_description(self, prob):
         if prob >= 90:
             return "Highly Probably"
         elif prob >= 75:
@@ -92,7 +92,7 @@ class Node(object):
         if event == 0:
             self.event = tree
         else:
-            self.event = events[event]
-        self.probability = probabilityDict[tree][event]
-        self.description = get_description(self.probability)
-        self.children = childrenDict[event]
+            self.event = self.events[event]
+        self.probability = self.probabilityDict[tree][event]
+        self.description = self.get_description(self.probability)
+        self.children = self.childrenDict[event]

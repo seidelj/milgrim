@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+
+{% block headers %}
+<link rel="stylesheet" href="{% static 'css/cover.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="site-wrapper">
+    <div class="site-wrapper-inner">
+        <div class="cover-container">
+
+            <div class="masthead clearfix">
+                <div class="inner">
+                    <h3 class="masthead-brand">Educational Paths and Outcomes</h3>
+                </div>
+            </div>
+
+            <div class="inner cover">
+                <h1 class="cover-heading">Choose a Path</h1>
+                <p class="lead">To begin your journey, choose the type of person you want to be like</p>
+                <div class="row">
+                {% for tree in trees %}
+                    <div class="cols-xs-12 col-sm-4 col-md-4">
+                        <p class="lead">
+                            <a href="{% url 'nodes:node' tree event %}" role="group" class="btn btn-lg btn-default">{{ tree }}</a>
+                        </p>
+                    </div>
+                {% endfor %}
+                </div>
+            </div>
+
+            <div class="mastfoot">
+                <div class="innder">
+                    <p>Created by the Universty of Chicago</p>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+{% endblock %}
