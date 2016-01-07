@@ -3,6 +3,16 @@ from __future__ import unicode_literals
 from django.db import models
 # Create your models here.
 
+class Path(models.Model):
+    name = models.CharField(max_length=128)
+
+class Decision(models.Model):
+    path = models.ForeignKey(Path)
+    event = models.IntegerField()
+    health = models.IntegerField()
+    money = models.IntegerField()
+    social = models.IntegerField()
+
 class Constants:
     trees = [
         'highC',
