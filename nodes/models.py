@@ -6,12 +6,17 @@ from django.db import models
 class Path(models.Model):
     name = models.CharField(max_length=128)
 
+
 class Decision(models.Model):
     path = models.ForeignKey(Path)
-    event = models.IntegerField()
-    health = models.IntegerField()
-    money = models.IntegerField()
-    social = models.IntegerField()
+    event = models.IntegerField(null=True)
+
+
+class Meter(models.Model):
+    decision = models.ForeignKey(Decision)
+    name = models.CharField(max_length=256)
+    value = models.IntegerField(null=True)
+
 
 class Constants:
     trees = [
