@@ -3,7 +3,7 @@ import website.wsgi
 from django.conf import settings
 
 
-from nodes.models import Path, Decision
+from nodes.models import Path, Decision, Meter
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 
@@ -14,9 +14,7 @@ with open(csvFile) as f:
     csvreader.next()
     for row in csvreader:
         path, created = Path.objects.get_or_create(name=row[0])
-        print path
         decision, created = Decision.objects.get_or_create(path_id=path.id,event=row[1])
-        decision.health = row[2]
-        decision.money = row[3]
-        decision.social = row[4]
-        decision.save()
+        health, created = Meter.objects.get_or_create(decision_id=decision.id, name="health", value=row[2])
+        money, created = Meter.objects.get_or_create(decision_id=decision.id, name="money", value=row[3])
+        social, created = Meter.objects.get_or_create(decision_id=decision.id, name="social", value=row[4])

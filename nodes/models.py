@@ -6,6 +6,9 @@ from django.db import models
 class Path(models.Model):
     name = models.CharField(max_length=128)
 
+    def get_meters(self, event):
+        decision = self.decision_set.filter(event=event)[0]
+        return decision.meter_set.all()
 
 class Decision(models.Model):
     path = models.ForeignKey(Path)
@@ -17,6 +20,13 @@ class Meter(models.Model):
     name = models.CharField(max_length=256)
     value = models.IntegerField(null=True)
 
+    def get_color(self):
+        if self.name == "money":
+            return "success"
+        elif self.name == "health":
+            return "danger"
+        elif self.name == "social":
+            return "warning"
 
 class Constants:
     trees = [

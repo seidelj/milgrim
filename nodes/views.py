@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from Tree import Node
-from models import Constants
+from models import Constants, Path
 # Create your views here.
 
 def index(request):
@@ -15,9 +15,11 @@ def node(request, tree, event):
     event = int(event)
     treeObj = Node(tree, event)
     children = []
+    path = Path.objects.get(name=tree)
     for c in treeObj.children:
         children.append(Node(tree, c))
     context = {
+        'meters': path.get_meters(event),
         'tree': tree,
         'children': children,
     }
