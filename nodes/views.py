@@ -19,6 +19,7 @@ def node(request, tree, event):
     for c in treeObj.children:
         children.append(Node(tree, c))
     context = {
+        'parentMeters': path.get_parent_meters(event),
         'meters': path.get_meters(event),
         'tree': tree,
         'children': children,

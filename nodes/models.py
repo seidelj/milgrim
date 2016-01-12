@@ -10,6 +10,16 @@ class Path(models.Model):
         decision = self.decision_set.filter(event=event)[0]
         return decision.meter_set.all()
 
+    def get_parent_meters(self, event):
+        parent = None
+        for key, value in Constants.children.items():
+            if event in value:
+                parent = key
+        if not parent:
+            parent = 0
+        decision = self.decision_set.filter(event=parent)[0]
+        return decision.meter_set.all()
+
 class Decision(models.Model):
     path = models.ForeignKey(Path)
     event = models.IntegerField(null=True)

@@ -6,12 +6,13 @@
             <th class="col-xs-2 col-sm-2 col-md-2">Meter</th>
             <th>Status</th>
         </tr>
-        {% for meter in meters %}
+        {% for meter in parentMeters %}
         <tr>
+            {{ meter.value }}
             <td>{{ meter.name }}</td>
             <td>
                 <div class="progress">
-                    <div class="progress-bar progress-bar-{{ meter.get_color }}" role="progressbar" aria-valuenow="{{ meter.value }}" aria-valuemin="0" aria-valuemax="100" style="width: {{ meter.value }}%">
+                    <div id="meter{{ meter.name }}" class="progress-bar progress-bar-{{ meter.get_color }}" role="progressbar" aria-valuenow="{{ meter.value }}" aria-valuemin="0" aria-valuemax="100" style="width: {{ meter.value }}%">
                         <span class="sr-only">{{ meter.value }} Complete (success)</span>
                     </div>
                 </div>
@@ -21,3 +22,9 @@
         </tbody>
     </table>
 </div>
+
+<script>
+{% for meter in meters %}
+    $( "#meter{{ meter.name}}" ).animate({width: "{{ meter.value }}%"}, 500);
+{% endfor %}
+</script>
