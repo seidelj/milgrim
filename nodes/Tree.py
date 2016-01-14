@@ -21,6 +21,29 @@ class Node(object):
             return "Very Unlikely"
 
 
+    def get_what_ifs(self):
+        if self.event > 9:
+            ladderLink = Constants.event[self.event]
+            ladderDescription = Constants.event[self.event-2]
+        else:
+            ladderLink = None
+            ladderDescription = None
+
+        if self.tree == "medC":
+            crossLink = 'highC'
+        elif self.tree == "lowC":
+            crossLink = 'medC'
+        elif self.tree == "medNc":
+            crossLink = "highNc"
+        elif self.tree == "lowNc":
+            crossLink = "medNc"
+        else:
+            crossLink = None
+
+        return dict(ladderLink=ladderLink, ladderDescription=ladderDescription, crossLink=crossLink)
+
+
+
     def get_event(self):
 
         if self.event == 0:
@@ -32,3 +55,4 @@ class Node(object):
         self.event = event
         self.probability = Constants.probabilities[tree][event-1]
         self.children = Constants.children[event]
+
