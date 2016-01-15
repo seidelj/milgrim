@@ -36,7 +36,7 @@
                 <div class="panel-body">
                     {% if child.probability %}
                     <p> {{ child.probability }}% This will happen </p>
-                    <p><a href="{% url 'nodes:node' tree child.event %}" class="btn btn-lg btn-info">Choose this path</a></p>
+                    <p><a href="{% url 'nodes:node' parent.tree child.event %}" class="btn btn-lg btn-info">Choose this path</a></p>
                     {% else %}
                     <p>You have reached the end of your journey.  Here's what life will be like</p>
                     {% endif %}
@@ -44,10 +44,29 @@
             </div>
         </div>
     {% endfor %}
-
-
         {% include "nodes/includes/meters.html" %}
+    {% if parent.get_what_ifs.ladderLink %}
+    <div class="row">
+        <div class="col-xs-12 col-sm-4 col-sm-offset-1 col-md-4 col-md-offset-1">
+            <h1 class="lead">What is...</h1>
+            <ul class="list-group">
+                <li class='list-group-item'>A job</li>
+                <li class='list-group-item'>Another Job</li>
+                <li class='list-group-item'>A third Job</li>
+                <li class='list-group-item'>A final Job</li>
+            </ul>
+        </div>
+
+        <div class="col-xs-12 col-sm-4 col-sm-offset-1 col-md-4 col-md-offset-1">
+            <h1 class="lead">What if...</h1>
+            <ul class="list-group">
+                <li class='list-group-item'><a href="{% url 'nodes:node' parent.tree parent.get_what_ifs.ladderLink %}">I {{ parent.get_what_ifs.ladderDescription }}</a></li>
+                <li class='list-group-item'><a href="{% url 'nodes:node' parent.get_what_ifs.crossLink parent.event %}"> I worked harder</a></li>
+            </ul>
+        </div>
     </div>
+    {% endif %}
+
 </div>
 
 {% endblock %}

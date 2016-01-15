@@ -22,9 +22,10 @@ class Node(object):
 
 
     def get_what_ifs(self):
-        if self.event > 9:
-            ladderLink = Constants.event[self.event]
-            ladderDescription = Constants.event[self.event-2]
+        if self.event > 4:
+            ladderLink = self.event - 1
+            child = Constants.children[self.event-1][0]
+            ladderDescription = Constants.events[child-1]
         else:
             ladderLink = None
             ladderDescription = None
@@ -52,6 +53,7 @@ class Node(object):
             return Constants.events[self.event-1]
 
     def __init__(self, tree, event):
+        self.tree = tree
         self.event = event
         self.probability = Constants.probabilities[tree][event-1]
         self.children = Constants.children[event]
