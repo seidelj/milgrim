@@ -48,12 +48,11 @@
     {% if parent.get_what_ifs.endNode %}
     <div class="row">
         <div class="col-xs-12 col-sm-4 col-sm-offset-1 col-md-4 col-md-offset-1">
-            <h1 class="lead">What is...</h1>
+            <h1 class="lead">Jobs common for this degree of education</h1>
             <ul class="list-group">
-                <li class='list-group-item'>A job</li>
-                <li class='list-group-item'>Another Job</li>
-                <li class='list-group-item'>A third Job</li>
-                <li class='list-group-item'>A final Job</li>
+                {% for link in parent.get_charts %}
+                <li class='list-group-item'><a href="/static/imgs/{{ link }}.png" target="_blank">Chart {{ forloop.counter }}</a></li>
+                {% endfor %}
             </ul>
         </div>
 

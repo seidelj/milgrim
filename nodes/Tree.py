@@ -45,6 +45,17 @@ class Node(object):
 
         return dict(endNode=True, ladderLink=ladderLink, ladderDescription=ladderDescription, crossLink=crossLink)
 
+    def get_charts(self):
+        if self.event == 4:
+            return ['chart10', 'chart11']
+        elif self.event == 5:
+            return ['chart12', 'chart13']
+        elif self.event == 6:
+            return ['chart14', 'chart15']
+        elif self.event == 7 or self.event == 8:
+            return ['chart16', 'chart17']
+        else:
+            return None
 
 
     def get_event(self):
