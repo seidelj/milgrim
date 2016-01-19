@@ -26,9 +26,11 @@ class Node(object):
             ladderLink = self.event - 1
             child = Constants.children[self.event-1][0]
             ladderDescription = Constants.events[child-1]
-        else:
+        elif self.event == 4:
             ladderLink = None
             ladderDescription = None
+        else:
+            return dict(endNode=False, ladderLink=None, ladderDescription=None, crossLink=None)
 
         if self.tree == "medC":
             crossLink = 'highC'
@@ -41,7 +43,7 @@ class Node(object):
         else:
             crossLink = None
 
-        return dict(ladderLink=ladderLink, ladderDescription=ladderDescription, crossLink=crossLink)
+        return dict(endNode=True, ladderLink=ladderLink, ladderDescription=ladderDescription, crossLink=crossLink)
 
 
 
