@@ -51,7 +51,7 @@
             <h1 class="lead">Jobs common for this degree of education</h1>
             <ul class="list-group">
                 {% for link in parent.get_charts %}
-                <li class='list-group-item'><a href="/static/imgs/{{ link }}.png" target="_blank">Chart {{ forloop.counter }}</a></li>
+                <li class='list-group-item'><a href="#" data-toggle="modal"  data-target="#chart{{ forloop.counter }}">Chart {{ forloop.counter }}</a></li>
                 {% endfor %}
             </ul>
         </div>
@@ -72,6 +72,8 @@
             </ul>
         </div>
     </div>
+
+    {% include 'nodes/includes/modal.html' %}
     {% endif %}
 
 </div>
