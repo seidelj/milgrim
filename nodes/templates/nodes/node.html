@@ -22,11 +22,7 @@
 
     <div class="row">
     {% for child in children %}
-        {% if children|length < 2 %}
-        <div class="col-xs-12 col-sm-6 col-sm-offset-3 col-md-6 col-md-offset-3">
-        {% else %}
-        <div class="col-xs-12 col-sm-6 col-md-6">
-        {% endif %}
+        <div {% if children|length < 2 %} class="col-xs-12 col-sm-6 col-sm-offset-3 col-md-6 col-md-offset-3" {% else %}class="col-xs-12 col-sm-6 col-md-6"{% endif %}>
             <div class="panel panel-default">
                 <div class="panel-heading">
                     <h3 class="panel-title">
@@ -35,8 +31,45 @@
                 </div>
                 <div class="panel-body">
                     {% if child.probability %}
-                    <p> {{ child.probability }}% This will happen </p>
-                    <p><a href="{% url 'nodes:node' parent.tree child.event %}" class="btn btn-lg btn-info">Choose this path</a></p>
+                    <div class="row">
+                        <div class="col-xs-6">
+                            <p><a href="{% url 'nodes:node' parent.tree child.event %}" class="btn btn-lg btn-info">Choose this path</a></p>
+                            {% if forloop.counter == 1 %}
+                                <p>People who choose this path tend to earn more money and have higher self-esteem.  They are also less likely to depend on welfare and less likely to spend time in prison.</p>
+                            {% else %}
+                                <p>People who choose this path tend to earn less money and have lower self-esteem.  They are also more likely to depend on welfare and more likely to spend time in prison.</p>
+                            {% endif %}
+                        </div>
+                        <div class="col-xs-6">
+                        {% if forloop.counter == 1 %}
+                            <p class="text-success">
+                                Wages <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+                            </p>
+                            <p class="text-success">
+                                Self-Esteem <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+                            </p>
+                            <p class="text-success">
+                                Prison <span class="glyphicon glyphicon-minus" aria-hidden="true"></span>
+                            </p>
+                            <p class="text-success">
+                                Welfare <span class="glyphicon glyphicon-minus" aria-hidden="true"></span>
+                            </p>
+                        {% else %}
+                            <p class="text-danger">
+                                Wages <span class="glyphicon glyphicon-minus" aria-hidden="true"></span>
+                            </p>
+                            <p class="text-danger">
+                                Self-Esteem <span class="glyphicon glyphicon-minus" aria-hidden="true"></span>
+                            </p>
+                            <p class="text-danger">
+                                Prison <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+                            </p>
+                            <p class="text-danger">
+                                Welfare <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+                            </p>
+                        {% endif %}
+                        </div>
+                    </div>
                     {% else %}
                     <p>You have reached the end of your journey.  Here's what life will be like</p>
                     {% endif %}
@@ -44,11 +77,13 @@
             </div>
         </div>
     {% endfor %}
-        {% include "nodes/includes/meters.html" %}
+    </div>
+
     {% if parent.get_what_ifs.endNode %}
+    {% include "nodes/includes/meters.html" %}
     <div class="row">
-        <div class="col-xs-12 col-sm-4 col-sm-offset-1 col-md-4 col-md-offset-1">
-            <h1 class="lead">Jobs common for this degree of education</h1>
+        <div class="col-xs-6 col-sm-4 col-sm-offset-1 col-md-4 col-md-offset-1">
+            <h1 class="lead">Common jobs for you</h1><hr>
             <ul class="list-group">
                 {% for link in parent.get_charts %}
                 <li class='list-group-item'><a href="#" data-toggle="modal"  data-target="#chart{{ forloop.counter }}">Chart {{ forloop.counter }}</a></li>
@@ -56,16 +91,16 @@
             </ul>
         </div>
 
-        <div class="col-xs-12 col-sm-4 col-sm-offset-1 col-md-4 col-md-offset-1">
-            <h1 class="lead">What if...</h1>
+        <div class="col-xs-6 col-sm-4 col-sm-offset-1 col-md-4 col-md-offset-1">
+            <h1 class="lead">Things I could do differently</h1><hr>
             <ul class="list-group">
                 {% if parent.get_what_ifs.ladderLink %}
-                <li class='list-group-item'><a href="{% url 'nodes:node' parent.tree parent.get_what_ifs.ladderLink %}">I {{ parent.get_what_ifs.ladderDescription }}</a></li>
+                <li class='list-group-item'><a href="{% url 'nodes:node' parent.tree parent.get_what_ifs.ladderLink %}">Pursue: {{ parent.get_what_ifs.ladderDescription }}</a></li>
                 {% else %}
                 <li class='list-group-item'>You graduated college, way to go!</li>
                 {% endif %}
                 {% if parent.get_what_ifs.crossLink %}
-                <li class='list-group-item'><a href="{% url 'nodes:node' parent.get_what_ifs.crossLink parent.event %}"> I worked harder</a></li>
+                <li class='list-group-item'><a href="{% url 'nodes:node' parent.get_what_ifs.crossLink parent.event %}">Work harder</a></li>
                 {% else %}
                 <li class='list-group-item'>You are in the top percentile!</li>
                 {% endif %}
@@ -77,5 +112,6 @@
     {% endif %}
 
 </div>
+
 
 {% endblock %}
