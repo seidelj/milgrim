@@ -2,19 +2,23 @@
 <div class="col-xs-12 col-sm-12 col-md-12">
     <table class="table">
         <tbody>
-        <tr>
+        <tr class="row">
             <th class="col-xs-2 col-sm-2 col-md-2">Meter</th>
             <th>Status</th>
+            <th>Description</th>
         </tr>
-        {% for meter in parentMeters %}
-        <tr>
-            <td>{{ meter.name }}</td>
-            <td>
+        {% for meter in meters %}
+        <tr class="row">
+            <td class="col-sm-2">{{ meter.name }}</td>
+            <td class="col-sm-4">
                 <div class="progress">
                     <div id="meter{{ meter.name }}" class="progress-bar progress-bar-{{ meter.get_color }}" role="progressbar" aria-valuenow="{{ meter.value }}" aria-valuemin="0" aria-valuemax="100" style="width: {{ meter.value }}%">
                         <span class="sr-only">{{ meter.value }} Complete (success)</span>
                     </div>
                 </div>
+            </td>
+            <td class="col-sm-4">
+                {{ meter.get_description }}
             </td>
         </tr>
         {% endfor %}

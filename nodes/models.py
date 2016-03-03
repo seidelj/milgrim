@@ -31,21 +31,27 @@ class Meter(models.Model):
     value = models.IntegerField(null=True)
 
     def get_color(self):
-        if self.name == "money":
+        if self.name == "wage":
             return "success"
-        elif self.name == "health":
-            return "danger"
-        elif self.name == "social":
+        elif self.name == "welfare":
             return "warning"
+        elif self.name == "prison":
+            return "danger"
+
+    def get_description(self):
+        if self.name == "wage":
+            return "This meter how much money you could make compared to a high school drop out, the MORE filled the better!"
+        if self.name == "welfare":
+            return "This meter shows how what your reliance on welfare could be related to a high school drop out, the LESS filled the better!"
+        if self.name == "prison":
+            return "This meter shows how likely you could be to having to spend time behind bars compared to a highschool dropout, the LESS filled the better!"
 
 class Constants:
     trees = [
-        'highC',
-        'medC',
-        'lowC',
-        'highNc',
-        'medNc',
-        'lowNc',
+        ['highC', "A-B Student", "You receive high grades and are at the top of your class!"],
+        ['medC', "Average Student", "You recieve mostly C grade"],
+        ['highNc', "Hard Worker", "You always complete all of your school work, no matter what!"],
+        ['medNc', "Average Worker", "You do most of your homework"],
     ]
 
     children = {
@@ -98,11 +104,14 @@ class Constants:
         ],
     }
 
+
+
+
     events = [
         "Graduate High School",
         "Drop out of High School",
         "Attend College",
-        'Graduate College',
+        "Graduate College",
         "Drop out of 4-year College",
         "Do not attend College",
         "Take GED",

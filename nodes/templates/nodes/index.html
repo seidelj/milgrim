@@ -21,10 +21,11 @@
                 <p class="lead">To begin your journey, choose the type of person you want to be like</p>
                 <div class="row">
                 {% for tree in trees %}
-                    <div class="cols-xs-12 col-sm-4 col-md-4">
+                    <div {% if forloop.counter == 4 %}class="col-xs-12 col-sm-4 col-sm-offset-4 col-md-offset-4" {% else %}class="cols-xs-12 col-sm-4 col-md-4">{% endif %}
                         <p class="lead">
-                            <a href="{% url 'nodes:node' tree event %}" role="group" class="btn btn-lg btn-default">{{ tree }}</a>
+                            <a href="{% url 'nodes:node' tree.0 event %}" role="group" class="btn btn-lg btn-default">{{ tree.1 }}</a>
                         </p>
+                        <p class="lead">{{ tree.2 }}</p>
                     </div>
                 {% endfor %}
                 </div>

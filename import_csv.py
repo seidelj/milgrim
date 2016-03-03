@@ -15,6 +15,6 @@ with open(csvFile) as f:
     for row in csvreader:
         path, created = Path.objects.get_or_create(name=row[0])
         decision, created = Decision.objects.get_or_create(path_id=path.id,event=row[1])
-        health, created = Meter.objects.get_or_create(decision_id=decision.id, name="health", value=row[2])
-        money, created = Meter.objects.get_or_create(decision_id=decision.id, name="money", value=row[3])
-        social, created = Meter.objects.get_or_create(decision_id=decision.id, name="social", value=row[4])
+        health, created = Meter.objects.get_or_create(decision_id=decision.id, name="wage", value=row[2])
+        money, created = Meter.objects.get_or_create(decision_id=decision.id, name="welfare", value=row[3])
+        social, created = Meter.objects.get_or_create(decision_id=decision.id, name="prison", value=row[4])
