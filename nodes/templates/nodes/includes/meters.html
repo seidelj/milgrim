@@ -3,14 +3,14 @@
     <table class="table">
         <tbody>
         <tr class="row">
-            <th class="col-xs-2 col-sm-2 col-md-2">Meter</th>
+            <th class="col-xs-1 col-sm-1 col-md-1">Meter</th>
             <th>Status</th>
             <th>Description</th>
         </tr>
         {% for meter in meters %}
         <tr class="row">
-            <td class="col-sm-2">{{ meter.name }}</td>
-            <td class="col-sm-4">
+            <td class="col-sm-1"><img src="{{ meter.get_icon }}"></td>
+            <td class="col-sm-5">
                 <div class="progress">
                     <div id="meter{{ meter.name }}" class="progress-bar progress-bar-{{ meter.get_color }}" role="progressbar" aria-valuenow="{{ meter.value }}" aria-valuemin="0" aria-valuemax="100" style="width: {{ meter.value }}%">
                         <span class="sr-only">{{ meter.value }} Complete (success)</span>

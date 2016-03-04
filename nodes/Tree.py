@@ -4,21 +4,21 @@ class Node(object):
 
     def get_description(self):
         if self.probability >= 90:
-            return "Highly Probably"
+            return "Highly probably"
         elif self.probability >= 75:
-            return "Quite Likely"
+            return "Quite likely"
         elif self.probability >= 65:
-            return "Rather Likely"
+            return "Rather likely"
         elif self.probability >= 56:
-            return "Better Than Even"
+            return "Better than even"
         elif self.probability >= 46:
             return "Toss-up"
         elif self.probability >= 40:
             return "Uncertain"
         elif self.probability > 10:
-            return "Not very Probable"
+            return "Not very probable"
         else:
-            return "Very Unlikely"
+            return "Very unlikely"
 
 
     def get_what_ifs(self):

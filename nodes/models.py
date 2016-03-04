@@ -38,11 +38,20 @@ class Meter(models.Model):
         elif self.name == "prison":
             return "danger"
 
+    def get_icon(self):
+        if self.name == "wage":
+            return "https://maxcdn.icons8.com/windows8/PNG/26/Finance/USD-26.png"
+        if self.name == "welfare":
+            return "https://maxcdn.icons8.com/iOS7/PNG/25/Finance/receive_cash-25.png"
+        if self.name == 'prison':
+            return "https://maxcdn.icons8.com/windows8/PNG/26/City/prisoner-26.png"
+        return None
+
     def get_description(self):
         if self.name == "wage":
             return "This meter how much money you could make compared to a high school drop out, the MORE filled the better!"
         if self.name == "welfare":
-            return "This meter shows how what your reliance on welfare could be related to a high school drop out, the LESS filled the better!"
+            return "This meter shows how reliant you may become on the state for assistance, the LESS filled the better!"
         if self.name == "prison":
             return "This meter shows how likely you could be to having to spend time behind bars compared to a highschool dropout, the LESS filled the better!"
 
@@ -73,13 +82,13 @@ class Constants:
 
     probabilities = {
         'highC': [
-            90, 10, 65, 63, 37, 35,
-            80, 20, None, None, None,
+            82, 18, 49, 38, 62, 51,
+            75, 25, None, None, None,
             None, None,
         ],
         'medC': [
-            80, 20, 42, 58, 43, 57,
-            53, 47, None, None, None,
+            68, 32, 37, 27, 73, 63,
+            58, 42, None, None, None,
             None, None,
         ],
         'lowC': [
@@ -88,13 +97,13 @@ class Constants:
             None, None,
         ],
         'highNc': [
-            90, 19, 54, 56, 44, 46,
-            60, 40, None, None, None,
+            85, 15, 47, 39, 61, 53,
+            65, 45, None, None, None,
             None, None,
         ],
         'medNc': [
-            80, 20, 47, 46, 54, 53,
-            60, 40, None, None, None,
+            68, 32, 37, 27, 73, 63,
+            58, 42, None, None, None,
             None, None,
         ],
         'lowNc': [

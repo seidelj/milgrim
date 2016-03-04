@@ -27,6 +27,11 @@
                 <div class="panel-heading">
                     <h3 class="panel-title">
                         {{ child.get_event }}
+                        {% if child.probability %}
+                        <span {% if child.probability > 52 %}class="text-success"{% elif child.probability >= 49 and child.probability <= 52 %}class="text-warning"{% else %}class="text-danger"{% endif %}>
+                            {{ child.probability }}% {{ child.get_description }}
+                        </span>
+                        {% endif %}
                     </h3>
                 </div>
                 <div class="panel-body">
