@@ -25,9 +25,3 @@
         </tbody>
     </table>
 </div>
-
-<script>
-{% for meter in meters %}
-    $( "#meter{{ meter.name}}" ).animate({width: "{{ meter.value }}%"}, 500);
-{% endfor %}
-</script>
