@@ -40,9 +40,9 @@
                         <div class="col-xs-6">
                             <p><a href="{% url 'nodes:node' parent.tree child.event %}" class="btn btn-lg btn-info">Choose this path</a></p>
                             {% if forloop.counter == 1 %}
-                                <p>People who choose this path tend to earn more money and have higher self-esteem.  They are also less likely to depend on welfare and less likely to spend time in prison.</p>
+                                <p>People who choose this path tend to earn more money.  They are also less likely to depend on welfare and less likely to spend time in prison.</p>
                             {% else %}
-                                <p>People who choose this path tend to earn less money and have lower self-esteem.  They are also more likely to depend on welfare and more likely to spend time in prison.</p>
+                                <p>People who choose this path tend to earn less money.  They are also more likely to depend on welfare and more likely to spend time in prison.</p>
                             {% endif %}
                         </div>
                         <div class="col-xs-6">
